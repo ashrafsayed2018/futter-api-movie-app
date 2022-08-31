@@ -5,7 +5,11 @@ import 'package:movie_app_with_api/pages/splash_screen.dart';
 void main() {
   runApp(
     SplashScreen(
-        key: UniqueKey(), onIntializeCompleted: () => runApp(const MyApp())),
+      key: UniqueKey(),
+      onIntializeCompleted: () => runApp(
+        const MyApp(),
+      ),
+    ),
   );
 }
 

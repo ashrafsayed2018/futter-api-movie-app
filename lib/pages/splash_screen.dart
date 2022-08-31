@@ -1,4 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:get_it/get_it.dart';
+import 'package:movie_app_with_api/models/app_config.dart';
 
 class SplashScreen extends StatefulWidget {
   final VoidCallback onIntializeCompleted;
@@ -15,8 +20,24 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 2))
-        .then((value) => widget.onIntializeCompleted());
+    Future.delayed(const Duration(seconds: 3)).then(
+      (value) => _setup(context).then(
+        (_) => widget.onIntializeCompleted(),
+      ),
+    );
+  }
+
+  Future<void> _setup(BuildContext context) async {
+    final getIt = GetIt.instance;
+    final configFile = await rootBundle.loadString("assets/config/main.json");
+    final configData = jsonDecode(configFile);
+    getIt.registerSingleton<AppConfig>(
+      AppConfig(
+        baseApiKey: configData['BASE_API_KEY'],
+        baseImageApiUrl: configData['BASE_IMAGE_API_URL'],
+        apiKey: configData['API_KEY'],
+      ),
+    );
   }
 
   @override
@@ -34,8 +55,7 @@ class _SplashScreenState extends State<SplashScreen> {
           decoration: const BoxDecoration(
             image: DecorationImage(
               fit: BoxFit.contain,
-              image: NetworkImage(
-                  "https://play-lh.googleusercontent.com/5Y97X0kfd9uznAJXFOmLXEjqNTjJNZ07nKOmPvPbFUoUKkBswIYGIzMOzcYnF9bMdw"),
+              image: AssetImage("assets/images/logo.png"),
             ),
           ),
         ),
