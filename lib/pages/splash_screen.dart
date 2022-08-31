@@ -22,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 1)).then(
+    Future.delayed(const Duration(seconds: 3)).then(
       (value) => _setup(context).then(
         (_) => widget.onIntializeCompleted(),
       ),

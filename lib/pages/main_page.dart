@@ -7,13 +7,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class MainPage extends ConsumerWidget {
   double? _deviceHeight;
   double? _deviceWidth;
-
+  TextEditingController? _searchTextFieldController;
   MainPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     _deviceHeight = MediaQuery.of(context).size.height;
     _deviceWidth = MediaQuery.of(context).size.width;
+    _searchTextFieldController = TextEditingController();
     return _buildUi();
   }
 
@@ -63,9 +64,56 @@ class MainPage extends ConsumerWidget {
       width: _deviceHeight! * .88,
       child: Column(
         mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: [],
+        children: [
+          _topBarWidget(),
+        ],
+      ),
+    );
+  }
+
+  Widget _topBarWidget() {
+    return Container(
+      height: _deviceWidth! * .08,
+      decoration: BoxDecoration(
+        color: Colors.black54,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          //  search field widget
+          _searchFieldWidget()
+        ],
+      ),
+    );
+  }
+
+  Widget _searchFieldWidget() {
+    const border = InputBorder.none;
+    return SizedBox(
+      width: _deviceWidth! * 0.05,
+      height: _deviceHeight! * 0.05,
+      child: TextField(
+        controller: _searchTextFieldController,
+        onSubmitted: (input) {},
+        style: const TextStyle(color: Colors.white),
+        decoration: const InputDecoration(
+          focusedBorder: border,
+          border: border,
+          prefixIcon: Icon(
+            Icons.search,
+            color: Colors.white24,
+          ),
+          hintStyle: TextStyle(
+            color: Colors.white54,
+          ),
+          fillColor: Colors.white24,
+          hintText: "search ....",
+        ),
       ),
     );
   }
