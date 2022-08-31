@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       initialRoute: 'home',
-      routes: {"home": (context) => const MainPage()},
+      routes: {"home": (context) => MainPage()},
     );
   }
 }
