@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
 import 'package:movie_app_with_api/models/app_config.dart';
+import 'package:movie_app_with_api/services/http_service.dart';
 
 class SplashScreen extends StatefulWidget {
   final VoidCallback onIntializeCompleted;
@@ -38,6 +39,7 @@ class _SplashScreenState extends State<SplashScreen> {
         apiKey: configData['API_KEY'],
       ),
     );
+    getIt.registerSingleton<HTTPService>(HTTPService());
   }
 
   @override
