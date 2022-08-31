@@ -27,6 +27,7 @@ class MainPage extends ConsumerWidget {
           alignment: Alignment.center,
           children: [
             _backgroundWidget(),
+            _forgroundWidgets(),
           ],
         ),
       ),
@@ -52,6 +53,19 @@ class MainPage extends ConsumerWidget {
             color: Colors.black.withOpacity(.2),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _forgroundWidgets() {
+    return Container(
+      padding: EdgeInsets.fromLTRB(0, _deviceHeight! * 0.02, 0, 0),
+      width: _deviceHeight! * .88,
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [],
       ),
     );
   }
